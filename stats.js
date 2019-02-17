@@ -18,14 +18,25 @@ function dateStamp() {
     let timeStamp = " ";
     var date = new Date();
 
-    var day = date.getDay();
-    var month = date.getMonth();
-    var year = date.getFullYear();
-
-    timeStamp = day + '/' + month + '/' + year;
-
+    timeStamp = "Recorded on: " + date;
     return timeStamp;
 }
+
+function stringDateStamp() {
+    let fileStamp = " ";
+    var date = new Date();
+
+    var month = date.getMonth()+1;
+    var day = date.getDate().toString();
+    var year = date.getFullYear().toString().substr(-2);
+    var mil = date.getMilliseconds().toString();
+
+
+    fileStamp = "Ticket Export " + day + "-" + month.toString() + "-" + year + "  " + mil;
+
+    return fileStamp;
+}
+
 
 function increment() {
 
@@ -37,8 +48,12 @@ function increment() {
 
 function setDownload() {
   let stamp = dateStamp();
-  let data = stamp + '.txt';
-  download(number, data, 'text/plain');
+  let file = stringDateStamp();
+
+  let data = file + '.txt';
+
+  var array = "Number of tickets updated\n" + number + "\n" + stamp;
+  download(array, data, 'text/plain');
 }
 
 function downloadClick() {
